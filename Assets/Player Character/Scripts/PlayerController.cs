@@ -7,7 +7,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
+    private float moveSpeed = 1.0f;
+    public float MoveSpeed { get => moveSpeed; }
+    [SerializeField]
     private CharacterController characterController;
+    public CharacterController CharacterController { get => characterController; }
 
     private PlayerState state;
 
@@ -21,14 +25,13 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
     }
+    private void Update()
+    {
+        state = state?.OnUpdate();
+    }
 
     public void Move(InputAction.CallbackContext ctx)
     {
         state = state.OnInput(ctx).DoState(ctx);
-    }
-
-    private void Update()
-    {
-        state = state?.OnUpdate();
     }
 }

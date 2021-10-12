@@ -10,8 +10,22 @@ public abstract class PlayerState
     {
         this.pController = pController;
     }
+    /// <summary>
+    /// Do on input while in the state
+    /// </summary>
+    /// <param name="ctx"></param>
+    /// <returns>The next state</returns>
     public abstract PlayerState OnInput(InputAction.CallbackContext ctx);
+    /// <summary>
+    /// Do after processing input input while in the state
+    /// </summary>
+    /// <param name="ctx">The input action callback context</param>
+    /// <returns>The next state</returns>
     public abstract PlayerState DoState(InputAction.CallbackContext ctx);
+    /// <summary>
+    /// Do every frame while in this state
+    /// </summary>
+    /// <returns>The next state</returns>
     public abstract PlayerState OnUpdate();
 }
 
@@ -42,26 +56,32 @@ public class IdleState : PlayerState
 
 public class MoveState : PlayerState
 {
+    private Vector3 move;
+
     public MoveState(PlayerController pController) : base(pController){}
     public override PlayerState OnInput(InputAction.CallbackContext ctx)
     {
+        Debug.Log(ctx.action.name);
         if (ctx.action.name.Equals("Move"))
         {
+            Vector2 move = ctx.ReadValue<Vector2>();
+            this.move = new Vector3(move.x, 0, move.y);
             return this;
         }
         return new IdleState(pController);
     }
     public override PlayerState DoState(InputAction.CallbackContext ctx)
     {
-        if (ctx.action.name.Equals("Move"))
-        {
-            Vector2 axis = ctx.ReadValue<Vector2>();
-            Debug.Log($"Player move input: {axis}");
-        }
         return this;
     }
     public override PlayerState OnUpdate()
     {
+        Debug.Log($"Player move input: {move}");
+        if (move == Vector3.zero)
+        {
+            return new IdleState(pController);
+        }
+        pController.CharacterController.Move(move * pController.MoveSpeed * Time.deltaTime);
         return this;
     }
 }
