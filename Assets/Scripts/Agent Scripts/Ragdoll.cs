@@ -72,7 +72,7 @@ public class Ragdoll : MonoBehaviour
     {
         Record();
         ragdollBodies = ragdollBodies.Select(body => { body.isKinematic = false; return body; }).ToList();
-        ragdollColliders = ragdollColliders.Select(col => { col.enabled = false; return col; }).ToList();
+        ragdollColliders = ragdollColliders.Select(col => { col.enabled = true; return col; }).ToList();
         if (animator != null)
         {
             animator.enabled = false;
@@ -88,7 +88,7 @@ public class Ragdoll : MonoBehaviour
     private void DisableRagdoll()
     {
         ragdollBodies = ragdollBodies.Select(body => { body.isKinematic = true; return body; }).ToList();
-        ragdollColliders = ragdollColliders.Select(col => { col.enabled = true; return col; }).ToList();
+        ragdollColliders = ragdollColliders.Select(col => { col.enabled = false; return col; }).ToList();
         if (animator != null)
         {
             animator.enabled = true;

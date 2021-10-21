@@ -109,8 +109,11 @@ public class SnoreState : PlayerState
         if (!startedRagdoll && pController.RagdollSeconds > 0)
         {
             pController.Ragdoll.ActivateRagdoll();
-            pController.AudioSource.loop = true;
-            pController.AudioSource.Play();
+            if (pController.AudioSource)
+            {
+                pController.AudioSource.loop = true;
+                pController.AudioSource.Play();
+            }
             startedRagdoll = true;
         }
         return this;
@@ -120,7 +123,10 @@ public class SnoreState : PlayerState
     {
         if (ragdollTimer >= pController.RagdollSeconds)
         {
-            pController.AudioSource.Stop();
+            if (pController.AudioSource)
+            {
+                pController?.AudioSource.Stop();
+            }
             pController.Ragdoll.UnRagdoll();
             return new IdleState(pController);
         }
