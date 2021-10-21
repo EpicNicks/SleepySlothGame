@@ -31,7 +31,10 @@ public class IdleState : PlayerState
 {
     private float idleTime;
 
-    public IdleState(PlayerController pController) : base(pController){}
+    public IdleState(PlayerController pController) : base(pController)
+    {
+        pController.Ragdoll.Animator.SetBool("isRunning", false);
+    }
     public override PlayerState OnInput(InputAction.CallbackContext ctx)
     {
         if (ctx.action.name.Equals("Move"))
@@ -60,7 +63,10 @@ public class MoveState : PlayerState
 {
     private Vector3 move;
 
-    public MoveState(PlayerController pController) : base(pController){}
+    public MoveState(PlayerController pController) : base(pController)
+    {
+        pController.Ragdoll.Animator.SetBool("isRunning", true);
+    }
     public override PlayerState OnInput(InputAction.CallbackContext ctx)
     {
         Debug.Log(ctx.action.name);
@@ -88,7 +94,8 @@ public class MoveState : PlayerState
         {
             return new IdleState(pController);
         }
-        pController.CharacterController.Move(move * pController.MoveSpeed * Time.deltaTime);
+        pController.transform.rotation = Quaternion.LookRotation(move);
+        pController.CharacterController.Move(pController.transform.forward * pController.MoveSpeed * Time.deltaTime);
         return this;
     }
 }
@@ -98,10 +105,21 @@ public class SnoreState : PlayerState
     private bool startedRagdoll = false;
     private float ragdollTimer = 0.0f;
 
-    public SnoreState(PlayerController pController) : base(pController){}
-
+    public SnoreState(PlayerController pController) : base(pController)
+    {
+        pController.Ragdoll.Animator.SetBool("isRunning", false);
+    }
     public override PlayerState OnInput(InputAction.CallbackContext ctx)
     {
+        if (ctx.action.name.Equals("Snore"))
+        {
+            if (pController.AudioSource)
+            {
+                pController?.AudioSource.Stop();
+            }
+            pController.Ragdoll.UnRagdoll();
+            return new IdleState(pController);
+        }
         return this;
     }
     public override PlayerState DoState(InputAction.CallbackContext ctx)
@@ -121,15 +139,6 @@ public class SnoreState : PlayerState
 
     public override PlayerState OnUpdate()
     {
-        if (ragdollTimer >= pController.RagdollSeconds)
-        {
-            if (pController.AudioSource)
-            {
-                pController?.AudioSource.Stop();
-            }
-            pController.Ragdoll.UnRagdoll();
-            return new IdleState(pController);
-        }
         ragdollTimer += Time.deltaTime;
         return this;
     }
