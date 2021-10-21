@@ -12,6 +12,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Snore",
+                    "type": "Button",
+                    "id": "1f13653e-a9b8-42e4-b394-d42de8c9e6bc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -124,6 +132,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e47d56a7-73fd-403e-b17b-bda99af84dba",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Snore",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

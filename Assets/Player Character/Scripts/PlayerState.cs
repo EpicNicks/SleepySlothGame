@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +38,10 @@ public class IdleState : PlayerState
         {
             return new MoveState(pController);
         }
+        else if (ctx.action.name.Equals("Snore"))
+        {
+            return new SnoreState(pController);
+        }
         return this;
     }
     public override PlayerState DoState(InputAction.CallbackContext ctx)
@@ -68,12 +70,17 @@ public class MoveState : PlayerState
             this.move = new Vector3(move.x, 0, move.y);
             return this;
         }
+        else if (ctx.action.name.Equals("Snore"))
+        {
+            return new SnoreState(pController);
+        }
         return new IdleState(pController);
     }
     public override PlayerState DoState(InputAction.CallbackContext ctx)
     {
         return this;
     }
+
     public override PlayerState OnUpdate()
     {
         Debug.Log($"Player move input: {move}");
@@ -85,3 +92,40 @@ public class MoveState : PlayerState
         return this;
     }
 }
+
+public class SnoreState : PlayerState
+{
+    private bool startedRagdoll = false;
+    private float ragdollTimer = 0.0f;
+
+    public SnoreState(PlayerController pController) : base(pController){}
+
+    public override PlayerState OnInput(InputAction.CallbackContext ctx)
+    {
+        return this;
+    }
+    public override PlayerState DoState(InputAction.CallbackContext ctx)
+    {
+        if (!startedRagdoll && pController.RagdollSeconds > 0)
+        {
+            pController.Ragdoll.ActivateRagdoll();
+            pController.AudioSource.loop = true;
+            pController.AudioSource.Play();
+            startedRagdoll = true;
+        }
+        return this;
+    }
+
+    public override PlayerState OnUpdate()
+    {
+        if (ragdollTimer >= pController.RagdollSeconds)
+        {
+            pController.AudioSource.Stop();
+            pController.Ragdoll.UnRagdoll();
+            return new IdleState(pController);
+        }
+        ragdollTimer += Time.deltaTime;
+        return this;
+    }
+}
+

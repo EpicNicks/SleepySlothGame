@@ -22,6 +22,7 @@ public class Ragdoll : MonoBehaviour
 
     [SerializeField]
     private Animator animator;
+    public Animator Animator => animator;
     [SerializeField]
     private List<Rigidbody> ragdollBodies;
     [SerializeField]
@@ -67,16 +68,6 @@ public class Ragdoll : MonoBehaviour
         }
     }
 
-    public void DisableRagdoll()
-    {
-        ragdollBodies = ragdollBodies.Select(body => { body.isKinematic = true; return body; }).ToList();
-        ragdollColliders = ragdollColliders.Select(col => { col.enabled = true; return col; }).ToList();
-        if (animator != null)
-        {
-            animator.enabled = true;
-        }
-    }
-
     public void ActivateRagdoll()
     {
         Record();
@@ -92,6 +83,16 @@ public class Ragdoll : MonoBehaviour
     {
         isRewinding = true;
         isRecording = false;
+    }
+
+    private void DisableRagdoll()
+    {
+        ragdollBodies = ragdollBodies.Select(body => { body.isKinematic = true; return body; }).ToList();
+        ragdollColliders = ragdollColliders.Select(col => { col.enabled = true; return col; }).ToList();
+        if (animator != null)
+        {
+            animator.enabled = true;
+        }
     }
 
     private void Record()
