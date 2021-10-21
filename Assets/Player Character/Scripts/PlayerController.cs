@@ -6,11 +6,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private PlayerState state;
+    private bool isRunning = false;
 
     #region Inspector Fields
     [SerializeField]
     private float moveSpeed = 1.0f;
-    public float MoveSpeed { get => moveSpeed; }
+    [SerializeField]
+    private float runModifier = 1.5f;
+    public float MoveSpeed { get => moveSpeed * (isRunning ? runModifier : 1.0f); }
     [SerializeField]
     private float ragdollSeconds = 1.0f;
     public float RagdollSeconds => ragdollSeconds;
@@ -59,5 +62,19 @@ public class PlayerController : MonoBehaviour
     public void OnInput(InputAction.CallbackContext ctx)
     {
         state = state?.OnInput(ctx)?.DoState(ctx);
+    }
+
+    public void Sprint(InputAction.CallbackContext ctx)
+    {
+        Debug.Log(ctx.action.phase);
+        if (ctx.action.phase.Equals(InputActionPhase.Started))
+        {
+            isRunning = true;
+        }
+        else if (ctx.action.phase.Equals(InputActionPhase.Canceled))
+        {
+            isRunning = false;
+        }
+        Debug.Log("isRunning " + isRunning);
     }
 }
