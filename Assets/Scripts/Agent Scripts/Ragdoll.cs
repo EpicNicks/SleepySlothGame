@@ -17,6 +17,9 @@ public class Ragdoll : MonoBehaviour
     private List<List<JointPos>> recordedJointPositions = new List<List<JointPos>> { };
 
     [SerializeField]
+    private List<Collider> disableOnRagdollDisabled = new List<Collider>{};
+
+    [SerializeField]
     [Min(0.0f)]
     private float recordingTime = 1.0f;
 
@@ -62,7 +65,11 @@ public class Ragdoll : MonoBehaviour
             else
             {
                 List<JointPos> jointPosFrame = recordedJointPositions.Last();
-                jointPosFrame.Select(jointPos => { jointPos.joint.transform.position = jointPos.pos; jointPos.joint.transform.rotation = jointPos.rot; return jointPos; });
+                jointPosFrame.ForEach(jp =>
+                {
+                    jp.joint.transform.position = jp.pos;
+                    jp.joint.transform.rotation = jp.rot;
+                });
                 recordedJointPositions.RemoveAt(recordedJointPositions.Count - 1);
             }
         }
@@ -77,6 +84,7 @@ public class Ragdoll : MonoBehaviour
         {
             animator.enabled = false;
         }
+        disableOnRagdollDisabled.ForEach(c => c.enabled = false);
     }
 
     public void UnRagdoll()
@@ -93,6 +101,7 @@ public class Ragdoll : MonoBehaviour
         {
             animator.enabled = true;
         }
+        disableOnRagdollDisabled.ForEach(c => c.enabled = true);
     }
 
     private void Record()
