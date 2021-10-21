@@ -77,6 +77,11 @@ public class AICore : MonoBehaviour
         }
     }
 
+    public void Alert(Vector3 position)
+    {
+
+    }
+
     public void Suspect(Vector3 suspectPosition)
     {
         // set game state to player pos suspected
