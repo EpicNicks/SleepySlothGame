@@ -62,6 +62,7 @@ public class IdleState : PlayerState
 public class MoveState : PlayerState
 {
     private Vector3 move;
+    private float turnSmoothVelocity;
 
     public MoveState(PlayerController pController) : base(pController)
     {
@@ -89,13 +90,20 @@ public class MoveState : PlayerState
 
     public override PlayerState OnUpdate()
     {
-        Debug.Log($"Player move input: {move}");
+        //Debug.Log($"Player move input: {move}");
         if (move == Vector3.zero)
         {
             return new IdleState(pController);
         }
-        pController.transform.rotation = Quaternion.LookRotation(move);
-        pController.CharacterController.Move(pController.transform.forward * pController.MoveSpeed * Time.deltaTime);
+        var targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+        var angle = Mathf.SmoothDampAngle(pController.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, pController.TurnSmoothTime);
+        pController.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        pController.CharacterController.Move(moveDir * pController.MoveSpeed * Time.deltaTime);
+
+        //pController.transform.rotation = Quaternion.LookRotation(move);
+        //pController.CharacterController.Move(pController.transform.forward * pController.MoveSpeed * Time.deltaTime);
         return this;
     }
 }
@@ -103,7 +111,6 @@ public class MoveState : PlayerState
 public class SnoreState : PlayerState
 {
     private bool startedRagdoll = false;
-    private float ragdollTimer = 0.0f;
 
     public SnoreState(PlayerController pController) : base(pController)
     {
@@ -139,7 +146,6 @@ public class SnoreState : PlayerState
 
     public override PlayerState OnUpdate()
     {
-        ragdollTimer += Time.deltaTime;
         return this;
     }
 }

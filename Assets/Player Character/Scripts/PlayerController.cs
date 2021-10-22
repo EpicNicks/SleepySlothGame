@@ -11,9 +11,12 @@ public class PlayerController : MonoBehaviour
     #region Inspector Fields
     [SerializeField]
     private float moveSpeed = 1.0f;
+    public float MoveSpeed => moveSpeed * (isRunning ? runModifier : 1.0f);
     [SerializeField]
     private float runModifier = 1.5f;
-    public float MoveSpeed { get => moveSpeed * (isRunning ? runModifier : 1.0f); }
+    [SerializeField]
+    private float turnSmoothTime;
+    public float TurnSmoothTime => turnSmoothTime;
     [SerializeField]
     private float ragdollSeconds = 1.0f;
     public float RagdollSeconds => ragdollSeconds;
@@ -66,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     public void Sprint(InputAction.CallbackContext ctx)
     {
-        Debug.Log(ctx.action.phase);
+        //Debug.Log(ctx.action.phase);
         if (ctx.action.phase.Equals(InputActionPhase.Started))
         {
             isRunning = true;

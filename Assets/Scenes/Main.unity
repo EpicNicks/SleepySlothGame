@@ -30013,7 +30013,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755587016}
-  - component: {fileID: 755587017}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -30036,22 +30035,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &755587017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755587015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8373fdc28873e884c96be5c337ce5bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterController: {fileID: 816121185}
-  cam: {fileID: 967035272}
-  speed: 0.1
-  turnSmoothTime: 0.1
 --- !u!1 &759340266
 GameObject:
   m_ObjectHideFlags: 0
@@ -33161,8 +33144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506e353ff9bbbae4ea67a3730f5e66a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 5
   runModifier: 1.5
+  turnSmoothTime: 0
   ragdollSeconds: 3
   ragdoll: {fileID: 816121184}
   snoreSFX: {fileID: 0}
@@ -33283,6 +33267,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1f13653e-a9b8-42e4-b394-d42de8c9e6bc
     m_ActionName: Player movement/Snore[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 816121183}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5899152d-d960-4041-aa8d-2cefa0aea9b9
+    m_ActionName: Player movement/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player movement
