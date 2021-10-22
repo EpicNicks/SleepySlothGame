@@ -78,6 +78,5 @@ public class PlayerController : MonoBehaviour
         {
             isRunning = false;
         }
-        Debug.Log("isRunning " + isRunning);
     }
 }

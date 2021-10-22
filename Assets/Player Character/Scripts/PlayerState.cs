@@ -70,7 +70,6 @@ public class MoveState : PlayerState
     }
     public override PlayerState OnInput(InputAction.CallbackContext ctx)
     {
-        Debug.Log(ctx.action.name);
         if (ctx.action.name.Equals("Move"))
         {
             Vector2 move = ctx.ReadValue<Vector2>();
@@ -111,6 +110,8 @@ public class MoveState : PlayerState
 public class SnoreState : PlayerState
 {
     private bool startedRagdoll = false;
+    private bool endRagdoll = false;
+    private float ragdollEndingSeconds = 0.0f;
 
     public SnoreState(PlayerController pController) : base(pController)
     {
@@ -118,14 +119,9 @@ public class SnoreState : PlayerState
     }
     public override PlayerState OnInput(InputAction.CallbackContext ctx)
     {
-        if (ctx.action.name.Equals("Snore"))
+        if (ctx.action.phase.Equals(InputActionPhase.Started) && ctx.action.name.Equals("Snore"))
         {
-            if (pController.AudioSource)
-            {
-                pController?.AudioSource.Stop();
-            }
-            pController.Ragdoll.UnRagdoll();
-            return new IdleState(pController);
+            endRagdoll = true;
         }
         return this;
     }
@@ -146,6 +142,22 @@ public class SnoreState : PlayerState
 
     public override PlayerState OnUpdate()
     {
+        if (endRagdoll)
+        {
+            if (pController.AudioSource)
+            {
+                pController?.AudioSource.Stop();
+            }
+            pController.Ragdoll.UnRagdoll();
+            if (ragdollEndingSeconds >= Mathf.Min(pController.Ragdoll.RecordingTime, pController.Ragdoll.CurRecordingTime))
+            {
+                return new IdleState(pController);
+            }
+            else
+            {
+                ragdollEndingSeconds += Time.deltaTime;
+            }
+        }
         return this;
     }
 }

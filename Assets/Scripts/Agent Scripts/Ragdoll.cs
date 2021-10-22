@@ -14,6 +14,7 @@ public class Ragdoll : MonoBehaviour
     private bool isRecording = false;
     private bool isRewinding = false;
     private float curRecordingTime = 0.0f;
+    public float CurRecordingTime => curRecordingTime;
     private List<List<JointPos>> recordedJointPositions = new List<List<JointPos>> { };
 
     [SerializeField]
@@ -22,6 +23,7 @@ public class Ragdoll : MonoBehaviour
     [SerializeField]
     [Min(0.0f)]
     private float recordingTime = 1.0f;
+    public float RecordingTime => recordingTime;
 
     [SerializeField]
     private Animator animator;
