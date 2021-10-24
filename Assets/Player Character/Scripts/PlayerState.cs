@@ -99,12 +99,13 @@ public class MoveState : PlayerState
             pController.CharacterController.Move(new Vector3(0, -2f, 0));
             return new IdleState(pController);
         }
+        pController.EnemyManager.SignalSound(pController.transform.position, pController.WalkNoiseRadius * (pController.isRunning ? 2.0f : 1.0f));
+
         var targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
         var angle = Mathf.SmoothDampAngle(pController.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, pController.TurnSmoothTime);
-        pController.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
+        pController.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         pController.CharacterController.Move(moveDir * pController.MoveSpeed * Time.deltaTime);
         pController.CharacterController.Move(new Vector3(0, pController.Gravity) * Time.deltaTime);
 

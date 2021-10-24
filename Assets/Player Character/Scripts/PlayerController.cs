@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private PlayerState state;
-    private bool isRunning = false;
+    public bool isRunning { get; private set; } = false;
 
     #region Inspector Fields
+    #region Movement
     [SerializeField]
     private float moveSpeed = 1.0f;
     public float MoveSpeed => moveSpeed * (isRunning ? runModifier : 1.0f);
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float turnSmoothTime;
     public float TurnSmoothTime => turnSmoothTime;
+    #endregion
     [SerializeField]
     private float ragdollSeconds = 1.0f;
     public float RagdollSeconds => ragdollSeconds;
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private CharacterController characterController;
     public CharacterController CharacterController => characterController;
+    #region Gravity
     [SerializeField]
     private Transform groundCheckTransform;
     public Transform GroundCheckTransform => groundCheckTransform;
@@ -43,6 +46,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float gravity;
     public float Gravity => gravity;
+    #endregion
+    #region Enemy Interaction
+    [SerializeField]
+    private float walkNoiseRadius = 1.0f;
+    public float WalkNoiseRadius => walkNoiseRadius;
+    [SerializeField]
+    private EnemyManager enemyManager;
+    public EnemyManager EnemyManager => enemyManager;
+    #endregion
     #endregion
 
     public bool IsGrounded => Physics.CheckSphere(GroundCheckTransform.position, GroundDistance, GroundMask);
@@ -62,6 +74,10 @@ public class PlayerController : MonoBehaviour
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
+        }
+        if (enemyManager == null)
+        {
+            enemyManager = FindObjectOfType<EnemyManager>();
         }
         #endregion
         if (audioSource != null)

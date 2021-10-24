@@ -7,58 +7,66 @@ using Utils;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AICore : MonoBehaviour
 {
+    private Transform playerTransform;
+    private float curChasingSeconds = 0.0f;
+
     [SerializeField]
-    private float investigateSuspiciousLocationSeconds = 3.0f;
+    private float losePlayerSeconds = 3.0f;
+    [SerializeField]
+    private float chaseSpeedMul = 2.0f;
     [SerializeField]
     private List<Transform> patrolPointsList = new List<Transform>{};
+    [SerializeField]
+    private AudioClip susClip;
+    [SerializeField]
+    private EnemyManager enemyManager;
 
     private LinkedList<Transform> patrolPoints;
     private LinkedListNode<Transform> nextPatrolPointNode;
 
-    private bool isSuspecting;
     private NavMeshAgent navMeshAgent;
+
+    private enum AIState
+    {
+        PATROLLING,
+        INVESTIGATING,
+        CHASING
+    }
+
+    private AIState state;
+
 
     private void Awake()
     {
+        if (enemyManager == null)
+        {
+            enemyManager = FindObjectOfType<EnemyManager>();
+        }
         patrolPoints = new LinkedList<Transform>(patrolPointsList);
         nextPatrolPointNode = patrolPoints.Last;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (isSuspecting)
+        if (state == AIState.CHASING)
         {
-            Maybe<Vector3> seenPlayerPos = SeenAt();
-            if (seenPlayerPos is Maybe<Vector3>.Some somePos)
-            {
-                PlayerFound(somePos.Value);
-            }
+            Chase();
+        }
+        else if (state == AIState.INVESTIGATING)
+        {
+            Investigate();
+        }
+        else if (state == AIState.PATROLLING)
+        {
+            Patrol();
         }
         else
         {
-            Maybe<Vector3> heardPlayerPos = HeardAt();
-            if (heardPlayerPos is Maybe<Vector3>.Some somePos)
-            {
-                Suspect(somePos.Value);
-            }
+            Debug.LogError($"Illegal state: {state} in AICore::state in gameObject: {gameObject}. Reseting to patrol state...");
+            state = AIState.PATROLLING;
         }
-    }
-    
-    // TODO: implement hearing mechanic
-    private Maybe<Vector3> HeardAt()
-    {
-        //placeholder
-        return new Maybe<Vector3>.None();
-    }
-
-
-    // TODO: implement vision mechanic
-    private Maybe<Vector3> SeenAt()
-    {
-        //placeholder
-        return new Maybe<Vector3>.None();
     }
 
     private bool PathComplete() => !navMeshAgent.pathPending
@@ -77,21 +85,55 @@ public class AICore : MonoBehaviour
         }
     }
 
+    private void Investigate()
+    {
+        if (PathComplete())
+        {
+            navMeshAgent?.SetDestination(nextPatrolPointNode.Value.position);
+            nextPatrolPointNode = nextPatrolPointNode.Next ?? patrolPoints.First;
+            state = AIState.PATROLLING;
+        }
+    }
+
+    private void Chase()
+    {
+        if (playerTransform != null)
+        {
+            navMeshAgent?.SetDestination(playerTransform.position);
+        }
+        curChasingSeconds += Time.deltaTime;
+        if (curChasingSeconds >= losePlayerSeconds)
+        {
+            curChasingSeconds = 0.0f;
+            PlayerLost();
+        }
+    }
+
     public void Alert(Vector3 position)
     {
-
+        //trigger surprised animation and sound effect
+        if (state == AIState.PATROLLING)
+        {
+            AudioSource.PlayClipAtPoint(susClip, transform.position);
+            navMeshAgent?.SetDestination(position);
+            state = AIState.INVESTIGATING;
+            enemyManager.UpdateGameState(EnemyManager.GameState.SUS);
+        }
     }
 
-    public void Suspect(Vector3 suspectPosition)
+    // called by vision script on player detected
+    public void Spotted(Transform playerTransform)
     {
-        // set game state to player pos suspected
-        // approach destination and observe for some amount of time
-        // if nothing seen, isSuspecting = false
+        this.playerTransform = playerTransform;
+        navMeshAgent.speed *= chaseSpeedMul;
+        state = AIState.CHASING;
+        enemyManager.UpdateGameState(EnemyManager.GameState.DETECTED);
     }
 
-    public void PlayerFound(Vector3 playerSpottedPosition)
+    private void PlayerLost()
     {
-        // set game state to player spotted
-        // update the destination to last seen
+        navMeshAgent.speed *= 1.0f / chaseSpeedMul;
+        state = AIState.PATROLLING;
+        enemyManager.UpdateGameState(EnemyManager.GameState.UNDETECTED);
     }
 }

@@ -5,22 +5,81 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("The distance that audio generated at a point can be heard from")]
-    private float audioRadius = 1.0f;
+    private GameObject player;
     private List<AICore> enemies = new List<AICore>{};
+
+    [SerializeField]
+    private bool alertAllEnemiesOnSpotted = false;
+    [SerializeField]
+    private AudioClip undetectedMusic;
+    [SerializeField]
+    private AudioClip susMusic;
+    [SerializeField]
+    private AudioClip chasingMusic;
+
+    [SerializeField]
+    private AudioSource audioSource;
+
+    public enum GameState
+    {
+        UNDETECTED,
+        SUS,
+        DETECTED
+    }
+    private GameState gameState = GameState.UNDETECTED;
+
+    private void Awake()
+    {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
 
     void Start()
     {
         enemies = FindObjectsOfType<AICore>().ToList();
+        player = FindObjectOfType<PlayerMovement>().gameObject;
     }
 
-    void Update()
+    private void ChangeMusic(AudioClip clip)
     {
-        
+        if (audioSource != null)
+        {
+            if (clip != audioSource.clip)
+            {
+                audioSource.Stop();
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
+        }
     }
 
-    public void SignalSound(Vector3 position)
+    public void UpdateGameState(GameState gameState)
+    {
+        if (this.gameState != gameState)
+        {
+            if (gameState == GameState.UNDETECTED)
+            {
+                ChangeMusic(undetectedMusic);
+            }
+            else if (gameState == GameState.SUS)
+            {
+                ChangeMusic(susMusic);
+            }
+            else if (gameState == GameState.DETECTED)
+            {
+                ChangeMusic(chasingMusic);
+                if (alertAllEnemiesOnSpotted)
+                {
+                    enemies.ForEach(e => e.Spotted(player.transform));
+                }
+            }
+            this.gameState = gameState;
+        }
+    }
+
+    public void SignalSound(Vector3 position, float audioRadius)
     {
         foreach (var enemy in enemies)
         {
