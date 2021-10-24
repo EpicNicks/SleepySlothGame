@@ -3,22 +3,7 @@ guid: 7fe1b685fbe64f947ad14351631815f0
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pILLARS
-    second: {fileID: -4674999510196394871, guid: d9662e38958364c488a94458d5bb8cf6, type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: rAILING
-    second: {fileID: -2247822047140307301, guid: 8811120919bc94a738216771a90662c1, type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: rAILS
-    second: {fileID: 2100000, guid: eef909d9deb9a7f42a96fa40480d8137, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
