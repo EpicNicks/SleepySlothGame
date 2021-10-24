@@ -54,6 +54,10 @@ public class IdleState : PlayerState
 
     public override PlayerState OnUpdate()
     {
+        if (!pController.IsGrounded)
+        {
+            return new MoveState(pController);
+        }
         idleTime += Time.deltaTime;
         return this;
     }
@@ -73,7 +77,8 @@ public class MoveState : PlayerState
         if (ctx.action.name.Equals("Move"))
         {
             Vector2 move = ctx.ReadValue<Vector2>();
-            this.move = new Vector3(move.x, 0, move.y);
+            this.move.x = move.x;
+            this.move.z = move.y;
             return this;
         }
         else if (ctx.action.name.Equals("Snore"))
@@ -89,9 +94,9 @@ public class MoveState : PlayerState
 
     public override PlayerState OnUpdate()
     {
-        //Debug.Log($"Player move input: {move}");
-        if (move == Vector3.zero)
+        if (move == Vector3.zero && pController.IsGrounded)
         {
+            pController.CharacterController.Move(new Vector3(0, -2f, 0));
             return new IdleState(pController);
         }
         var targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
@@ -99,7 +104,9 @@ public class MoveState : PlayerState
         pController.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
         pController.CharacterController.Move(moveDir * pController.MoveSpeed * Time.deltaTime);
+        pController.CharacterController.Move(new Vector3(0, pController.Gravity) * Time.deltaTime);
 
         //pController.transform.rotation = Quaternion.LookRotation(move);
         //pController.CharacterController.Move(pController.transform.forward * pController.MoveSpeed * Time.deltaTime);

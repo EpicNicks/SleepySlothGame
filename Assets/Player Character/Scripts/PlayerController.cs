@@ -31,7 +31,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private CharacterController characterController;
     public CharacterController CharacterController => characterController;
+    [SerializeField]
+    private Transform groundCheckTransform;
+    public Transform GroundCheckTransform => groundCheckTransform;
+    [SerializeField]
+    private float groundDistance = 0.4f;
+    public float GroundDistance => groundDistance;
+    [SerializeField]
+    private LayerMask groundMask;
+    public LayerMask GroundMask => groundMask;
+    [SerializeField]
+    private float gravity;
+    public float Gravity => gravity;
     #endregion
+
+    public bool IsGrounded => Physics.CheckSphere(GroundCheckTransform.position, GroundDistance, GroundMask);
 
 
     private void Awake()
@@ -79,4 +93,5 @@ public class PlayerController : MonoBehaviour
             isRunning = false;
         }
     }
+
 }
