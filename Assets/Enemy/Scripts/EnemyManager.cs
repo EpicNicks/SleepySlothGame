@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         enemies = FindObjectsOfType<AICore>().ToList();
-        player = FindObjectOfType<PlayerMovement>().gameObject;
+        player = FindObjectOfType<PlayerController>().gameObject;
     }
 
     private void ChangeMusic(AudioClip clip)
