@@ -78,6 +78,11 @@ public class PlayerController : MonoBehaviour
         if (enemyManager == null)
         {
             enemyManager = FindObjectOfType<EnemyManager>();
+            if (enemyManager == null)
+            {
+                GameObject g = new GameObject("EnemyManager");
+                enemyManager = g.AddComponent<EnemyManager>();
+            }
         }
         #endregion
         if (audioSource != null)
