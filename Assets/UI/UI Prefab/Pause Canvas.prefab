@@ -472,8 +472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myFx: {fileID: 3239833719215437170}
-  hoverFx: {fileID: 8300000, guid: 8e3f810b8e0e3489999800ff99755ee1, type: 3}
-  clickFx: {fileID: 8300000, guid: 75b88aa127a664a29bd71ebbd524d8e8, type: 3}
+  hoverFx: {fileID: 8300000, guid: 111082cb049604cd1b870132e487c95e, type: 3}
+  clickFx: {fileID: 8300000, guid: 2a35a65196e104d2d938922f7187c5a4, type: 3}
 --- !u!82 &3239833719215437170
 AudioSource:
   m_ObjectHideFlags: 0
