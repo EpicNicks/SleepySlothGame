@@ -22,6 +22,7 @@ public class PauseMenu : MonoBehaviour
             {
                 Pause();
             }
+            button.SetActive(false);
         }
     }
     public void Resume()
