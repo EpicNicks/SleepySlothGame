@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6083384382083929554}
   - component: {fileID: 6468705291926799856}
   - component: {fileID: 3442993166879748438}
+  - component: {fileID: 2345786411085831830}
   m_Layer: 0
   m_Name: 3_wooden_crates
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2345786411085831830
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722690256922285420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3970616138292878408, guid: 8811120919bc94a738216771a90662c1, type: 3}
 --- !u!1 &9200696368901084517
 GameObject:
   m_ObjectHideFlags: 0
