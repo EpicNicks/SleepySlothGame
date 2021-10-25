@@ -7,18 +7,17 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-    public GameObject button;
+    //public GameObject button;
    
     void Update()
     {
         //press Escape key or click Pause button to call PauseMenu
      if (Input.GetKeyDown(KeyCode.Escape))
         {
-            button.SetActive(false);
+            //button.SetActive(false);
             if (GameIsPaused)
             {
                 Resume();
-                button.SetActive(true);
             }
             else
             {
@@ -32,10 +31,12 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        button.SetActive(true);
+        Cursor.visible = false;
+        //button.SetActive(true);
     }
     public void Pause()
     {
+        Cursor.visible = true;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
