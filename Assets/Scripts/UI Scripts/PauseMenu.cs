@@ -14,14 +14,17 @@ public class PauseMenu : MonoBehaviour
         //press Escape key or click Pause button to call PauseMenu
      if (Input.GetKeyDown(KeyCode.Escape))
         {
+            button.SetActive(false);
             if (GameIsPaused)
             {
                 Resume();
+                button.SetActive(true);
             }
             else
             {
                 Pause();
             }
+            
         }
     }
     public void Resume()
