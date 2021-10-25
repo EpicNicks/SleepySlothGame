@@ -5,14 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class WinScreenScript : MonoBehaviour
 {
-    public void GoToNextLevel()
+    public GameObject WinScreen;
+
+    private void Update()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(WinScreen.activeSelf == true)
+            {
+                WinScreen.SetActive(false);
+                Time.timeScale = 1f;
+            }
+            else
+            {
+                WinScreen.SetActive(true);
+                Time.timeScale = 0f;
+            }
+        }
     }
 
-    public void LoadLevel(string level)
+
+    public void GoBackToMainMenu()
     {
-        SceneManager.LoadScene(level);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main Menu");
     }
 }
