@@ -15,10 +15,12 @@ public class WinScreenScript : MonoBehaviour
             {
                 WinScreen.SetActive(false);
                 Time.timeScale = 1f;
+                Cursor.visible = false;
             }
             else
             {
                 WinScreen.SetActive(true);
+                Cursor.visible = true;
                 Time.timeScale = 0f;
             }
         }

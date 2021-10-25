@@ -17,7 +17,9 @@ public class PauseMenu : MonoBehaviour
             //button.SetActive(false);
             if (GameIsPaused)
             {
-                Resume();
+                //button.SetActive(true);
+                Cursor.visible = false;
+                Resume(); 
             }
             else
             {
