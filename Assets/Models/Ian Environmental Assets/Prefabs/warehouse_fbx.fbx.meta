@@ -16,27 +16,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material__001
-    second: {fileID: 2100000, guid: 4d8a0cb19498368458bfb2b22be4edef, type: 2}
+    second: {fileID: 2100000, guid: 835ed66a390b03545bb38581221086f6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: vray__002
-    second: {fileID: 2100000, guid: 4d8a0cb19498368458bfb2b22be4edef, type: 2}
+    second: {fileID: 2100000, guid: aa4dc3b5b4d5b8b42bbb306481f067c3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: vray__004
-    second: {fileID: 2100000, guid: 4d8a0cb19498368458bfb2b22be4edef, type: 2}
+    second: {fileID: 2100000, guid: 835ed66a390b03545bb38581221086f6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: vray__glass
-    second: {fileID: 2100000, guid: 4d8a0cb19498368458bfb2b22be4edef, type: 2}
+    second: {fileID: 2100000, guid: a7b9e72fa54f0764d8cd06357049acbb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: vray_concreto_forma
-    second: {fileID: 2100000, guid: 4d8a0cb19498368458bfb2b22be4edef, type: 2}
+    second: {fileID: 2100000, guid: 9896923e3047d3f4a8620a230538ecad, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
