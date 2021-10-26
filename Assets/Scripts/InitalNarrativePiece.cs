@@ -2,19 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [RequireComponent(typeof(AudioSource))]
 
-public class PlayNarrativeAudio : MonoBehaviour
+
+public class InitalNarrativePiece : MonoBehaviour
 {
 
     public AudioClip audio;
     private AudioSource audioSource;
     private bool isPlayed = false;
+    public GameObject canvas;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        if ((Input.GetKeyDown("space")) || (Input.GetKeyDown(KeyCode.LeftShift)))
+        {
+            canvas.SetActive(false);
+        }
     }
 
     void OnTriggerEnter(Collider collision)
@@ -25,6 +34,7 @@ public class PlayNarrativeAudio : MonoBehaviour
             {
                 Debug.Log("PlayNarration");
                 audioSource.PlayOneShot(audio);
+                canvas.SetActive(true);
                 isPlayed = true;
             }
 
