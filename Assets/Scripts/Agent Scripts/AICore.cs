@@ -23,6 +23,8 @@ public class AICore : MonoBehaviour
     [SerializeField]
     private EnemyManager enemyManager;
     [SerializeField]
+    private Animator animator;
+    [SerializeField]
     private GameObject loseMenu;
 
     private LinkedList<Transform> patrolPoints;
@@ -51,6 +53,10 @@ public class AICore : MonoBehaviour
                 enemyManager = g.AddComponent<EnemyManager>();
             }
         }
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
         playerTransform = FindObjectOfType<PlayerController>().transform;
 
         patrolPoints = new LinkedList<Transform>(patrolPointsList);
@@ -61,6 +67,8 @@ public class AICore : MonoBehaviour
 
     private void Update()
     {
+        animator.SetBool("isWalking", navMeshAgent.velocity.magnitude > 0.01f);
+        
         if (state == AIState.CHASING)
         {
             Chase();
@@ -142,6 +150,7 @@ public class AICore : MonoBehaviour
     // called by vision script on player detected
     public void Spotted()
     {
+        animator.SetBool("isRunning", true);
         navMeshAgent.speed *= chaseSpeedMul;
         state = AIState.CHASING;
         enemyManager.UpdateGameState(EnemyManager.GameState.DETECTED);
@@ -149,6 +158,7 @@ public class AICore : MonoBehaviour
 
     private void PlayerLost()
     {
+        animator.SetBool("isRunning", false);
         navMeshAgent.speed *= 1.0f / chaseSpeedMul;
         state = AIState.PATROLLING;
         enemyManager.UpdateGameState(EnemyManager.GameState.UNDETECTED);
