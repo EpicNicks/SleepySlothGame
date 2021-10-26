@@ -99,9 +99,12 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var enemy in enemies)
         {
-            if (Vector3.Distance(enemy.transform.position, position) <= audioRadius)
+            if (enemy != null)
             {
-                enemy.Alert(position);
+                if (Vector3.Distance(enemy.transform.position, position) <= audioRadius)
+                {
+                    enemy.Alert(position);
+                }
             }
         }
     }

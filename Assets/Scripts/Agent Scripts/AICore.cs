@@ -137,6 +137,7 @@ public class AICore : MonoBehaviour
         if (Vector3.Distance(playerTransform.position, transform.position) < playerCaughtRadius)
         {
             Debug.Log("caught");
+            Cursor.visible = true;
             enemyManager.UpdateGameState(EnemyManager.GameState.LOSE);
             loseMenu.SetActive(true);
             FadeIn();
