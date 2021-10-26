@@ -24,7 +24,9 @@ public class EnemyManager : MonoBehaviour
     {
         UNDETECTED,
         SUS,
-        DETECTED
+        DETECTED,
+        WIN,
+        LOSE
     }
     private GameState gameState = GameState.UNDETECTED;
 
@@ -73,6 +75,20 @@ public class EnemyManager : MonoBehaviour
                 if (alertAllEnemiesOnSpotted)
                 {
                     enemies.ForEach(e => e.Spotted());
+                }
+            }
+            else if (gameState == GameState.LOSE)
+            {
+                foreach (var enemy in enemies)
+                {
+                    Destroy(enemy);
+                }
+            }
+            else if (gameState == GameState.WIN)
+            {
+                foreach (var enemy in enemies)
+                {
+                    Destroy(enemy);
                 }
             }
             this.gameState = gameState;

@@ -137,6 +137,7 @@ public class AICore : MonoBehaviour
         if (Vector3.Distance(playerTransform.position, transform.position) < playerCaughtRadius)
         {
             Debug.Log("caught");
+            enemyManager.UpdateGameState(EnemyManager.GameState.LOSE);
             loseMenu.SetActive(true);
             FadeIn();
         }
@@ -151,7 +152,7 @@ public class AICore : MonoBehaviour
         float _timeStartedLerping = Time.time;
         float timeSinceStarted = Time.time - _timeStartedLerping;
         float percentageComplete = timeSinceStarted / lerpTime;
-
+        cg = loseMenu.GetComponent<CanvasGroup>();
         while (true)
         {
             timeSinceStarted = Time.time - _timeStartedLerping;
@@ -194,7 +195,7 @@ public class AICore : MonoBehaviour
     private void PlayerLost()
     {
         animator.SetBool("isRunning", false);
-        navMeshAgent.speed *= 1.0f / chaseSpeedMul;
+        navMeshAgent.speed /= chaseSpeedMul;
         state = AIState.PATROLLING;
         enemyManager.UpdateGameState(EnemyManager.GameState.UNDETECTED);
     }
