@@ -24,9 +24,9 @@ public class PauseMenu : MonoBehaviour
             {
                 Pause();
             }
-            Cursor.visible = GameIsPaused;
-            
         }
+
+        Cursor.visible = GameIsPaused;
     }
     public void Resume()
     {
