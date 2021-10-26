@@ -72,7 +72,7 @@ public class EnemyManager : MonoBehaviour
                 ChangeMusic(chasingMusic);
                 if (alertAllEnemiesOnSpotted)
                 {
-                    enemies.ForEach(e => e.Spotted(player.transform));
+                    enemies.ForEach(e => e.Spotted());
                 }
             }
             this.gameState = gameState;

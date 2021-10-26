@@ -11,6 +11,8 @@ public class AICore : MonoBehaviour
     private float curChasingSeconds = 0.0f;
 
     [SerializeField]
+    private float playerCaughtRadius = 0.5f;
+    [SerializeField]
     private float losePlayerSeconds = 3.0f;
     [SerializeField]
     private float chaseSpeedMul = 2.0f;
@@ -20,6 +22,8 @@ public class AICore : MonoBehaviour
     private AudioClip susClip;
     [SerializeField]
     private EnemyManager enemyManager;
+    [SerializeField]
+    private GameObject loseMenu;
 
     private LinkedList<Transform> patrolPoints;
     private LinkedListNode<Transform> nextPatrolPointNode;
@@ -41,7 +45,14 @@ public class AICore : MonoBehaviour
         if (enemyManager == null)
         {
             enemyManager = FindObjectOfType<EnemyManager>();
+            if (enemyManager == null)
+            {
+                GameObject g = new GameObject("EnemyManager");
+                enemyManager = g.AddComponent<EnemyManager>();
+            }
         }
+        playerTransform = FindObjectOfType<PlayerController>().transform;
+
         patrolPoints = new LinkedList<Transform>(patrolPointsList);
         nextPatrolPointNode = patrolPoints.Last;
 
@@ -107,6 +118,10 @@ public class AICore : MonoBehaviour
             curChasingSeconds = 0.0f;
             PlayerLost();
         }
+        if (Vector3.Distance(playerTransform.position, transform.position) < playerCaughtRadius)
+        {
+            loseMenu.SetActive(true);
+        }
     }
 
     public void Alert(Vector3 position)
@@ -114,7 +129,10 @@ public class AICore : MonoBehaviour
         //trigger surprised animation and sound effect
         if (state == AIState.PATROLLING)
         {
-            AudioSource.PlayClipAtPoint(susClip, transform.position);
+            if (susClip)
+            {
+                AudioSource.PlayClipAtPoint(susClip, transform.position);
+            }
             navMeshAgent?.SetDestination(position);
             state = AIState.INVESTIGATING;
             enemyManager.UpdateGameState(EnemyManager.GameState.SUS);
@@ -122,9 +140,8 @@ public class AICore : MonoBehaviour
     }
 
     // called by vision script on player detected
-    public void Spotted(Transform playerTransform)
+    public void Spotted()
     {
-        this.playerTransform = playerTransform;
         navMeshAgent.speed *= chaseSpeedMul;
         state = AIState.CHASING;
         enemyManager.UpdateGameState(EnemyManager.GameState.DETECTED);
