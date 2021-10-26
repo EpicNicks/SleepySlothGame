@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
+
 public class InitalNarrativePiece : MonoBehaviour
 {
 
-    public AudioSource audio;
+    public AudioClip audio;
+    private AudioSource audioSource;
     private bool isPlayed = false;
     public GameObject canvas;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -25,7 +33,7 @@ public class InitalNarrativePiece : MonoBehaviour
             if (isPlayed == false)
             {
                 Debug.Log("PlayNarration");
-                audio.Play();
+                audioSource.PlayOneShot(audio);
                 canvas.SetActive(true);
                 isPlayed = true;
             }

@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(AudioSource))]
+
 public class PlayNarrativeAudio : MonoBehaviour
 {
 
-    public AudioSource audio;
+    public AudioClip audio;
+    private AudioSource audioSource;
     private bool isPlayed = false;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter(Collider collision)
     {
@@ -15,7 +24,7 @@ public class PlayNarrativeAudio : MonoBehaviour
             if (isPlayed == false)
             {
                 Debug.Log("PlayNarration");
-                audio.Play();
+                audioSource.PlayOneShot(audio);
                 isPlayed = true;
             }
 
