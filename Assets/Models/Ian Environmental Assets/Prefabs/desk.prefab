@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7991647489992763737}
   - component: {fileID: 817427385610986380}
   - component: {fileID: 3286499581639019868}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LODEX3D_VOL1_BOOKS_L3DV1B001_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1093393808587731956}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125073842542757408}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Kastel_kompasso high back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3973527977075366832}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: srubka12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7918742983999994125}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: srubka13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 2350615305138961374}
   - component: {fileID: 1827877620022725998}
   - component: {fileID: 2887963081987277127}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 6544294597450301896}
   - component: {fileID: 6837036912167064476}
   - component: {fileID: 8927501697844811999}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Kastel_kompasso (high back) headreset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 7257520606224786833}
   - component: {fileID: 5247262431407845026}
   - component: {fileID: 2396054970356122097}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 12335_The_Thinker_v3_l2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 920360205096212110}
   - component: {fileID: 4753616739073202661}
   - component: {fileID: 8534594933568193590}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cilindro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +570,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7913527586006276438}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boole_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 6585247958102684316}
   - component: {fileID: 4555714408880029547}
   - component: {fileID: 1126790817128294641}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: "\u041A\u0443\u0431"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3123897915606494547}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cap_1_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 972385080938483136}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Atom_Array
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +741,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 330669259621339395}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: srubka10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 9200843640851643795}
   - component: {fileID: 8929919909174318292}
   - component: {fileID: 1526521013933316200}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.054
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943541372477926829}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 2969407273995873504}
   - component: {fileID: 3818569519557670183}
   - component: {fileID: 810803055667459227}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Monitor 27' Curved
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -976,7 +976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7961736641742337728}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Boole_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1008,7 @@ GameObject:
   - component: {fileID: 5793673518042618386}
   - component: {fileID: 6276884643419312783}
   - component: {fileID: 4616470574853361050}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 10105_Computer Keyboard_v1_L3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1089,7 +1089,7 @@ GameObject:
   - component: {fileID: 543129437042680204}
   - component: {fileID: 8206437175592780785}
   - component: {fileID: 5480572403957724952}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: enganche boli
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1171,7 +1171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9200560192133444275}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: srubka15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1203,7 +1203,7 @@ GameObject:
   - component: {fileID: 4707480591942927336}
   - component: {fileID: 2255646472541080007}
   - component: {fileID: 4817883547105785395}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.031
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,7 +1283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7382676250754765931}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Line05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1313,7 +1313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3526851542608049812}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: srubka14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1343,7 +1343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4970344152663409883}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: IPHONE_X_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1378,7 +1378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2741173381905859700}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: kamera_alt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1410,7 +1410,7 @@ GameObject:
   - component: {fileID: 1032578753746025176}
   - component: {fileID: 8772951153418630844}
   - component: {fileID: 3648308811989523067}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rounding_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1503,7 @@ GameObject:
   - component: {fileID: 2516034995559487231}
   - component: {fileID: 6332057726997275250}
   - component: {fileID: 9150141877272765389}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GOMA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1585,7 +1585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8732592157545798873}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: usb01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1615,7 +1615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811013863553359154}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Circle01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1645,7 +1645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8278792208134397348}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cap_1_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,7 +1675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8517114553044454734}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: usb02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

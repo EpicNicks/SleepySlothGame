@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCaughtRadius: 0.5
   losePlayerSeconds: 3
-  chaseSpeedMul: 2
+  chaseSpeedMul: 1.5
   patrolPointsList:
   - {fileID: 0}
   - {fileID: 0}
