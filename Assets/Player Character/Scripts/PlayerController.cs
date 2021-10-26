@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private PlayerState state;
+    public PlayerState State => state;
     public bool isRunning { get; private set; } = false;
 
     #region Inspector Fields

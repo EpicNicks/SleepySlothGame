@@ -9,6 +9,7 @@ using Utils;
 public class AICore : MonoBehaviour
 {
     private Transform playerTransform;
+    public Transform PlayerTransform => playerTransform;
     private float curChasingSeconds = 0.0f;
 
     [SerializeField]
@@ -44,7 +45,7 @@ public class AICore : MonoBehaviour
         CHASING
     }
 
-    private AIState state;
+    private AIState state = AIState.PATROLLING;
 
 
     private void Awake()
@@ -65,9 +66,14 @@ public class AICore : MonoBehaviour
         playerTransform = FindObjectOfType<PlayerController>().transform;
 
         patrolPoints = new LinkedList<Transform>(patrolPointsList);
-        nextPatrolPointNode = patrolPoints.Last;
+        nextPatrolPointNode = patrolPoints.First;
 
         navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        navMeshAgent?.SetDestination(nextPatrolPointNode.Value.position);
     }
 
     private void Update()
@@ -99,13 +105,10 @@ public class AICore : MonoBehaviour
 
     public void Patrol()
     {
-        if (nextPatrolPointNode.Value != null)
+        navMeshAgent?.SetDestination(nextPatrolPointNode.Value.position);
+        if (PathComplete())
         {
-            if (PathComplete())
-            {
-                navMeshAgent?.SetDestination(nextPatrolPointNode.Value.position);
-                nextPatrolPointNode = nextPatrolPointNode.Next ?? patrolPoints.First;
-            }
+            nextPatrolPointNode = nextPatrolPointNode.Next ?? patrolPoints.First;
         }
     }
 
@@ -113,7 +116,7 @@ public class AICore : MonoBehaviour
     {
         if (PathComplete())
         {
-            navMeshAgent?.SetDestination(nextPatrolPointNode.Value.position);
+            navMeshAgent.SetDestination(nextPatrolPointNode.Value.position);
             nextPatrolPointNode = nextPatrolPointNode.Next ?? patrolPoints.First;
             state = AIState.PATROLLING;
         }
@@ -133,6 +136,7 @@ public class AICore : MonoBehaviour
         }
         if (Vector3.Distance(playerTransform.position, transform.position) < playerCaughtRadius)
         {
+            Debug.Log("caught");
             loseMenu.SetActive(true);
             FadeIn();
         }
@@ -166,7 +170,7 @@ public class AICore : MonoBehaviour
     public void Alert(Vector3 position)
     {
         //trigger surprised animation and sound effect
-        if (state == AIState.PATROLLING)
+        if (state == AIState.PATROLLING || state == AIState.INVESTIGATING)
         {
             if (susClip)
             {

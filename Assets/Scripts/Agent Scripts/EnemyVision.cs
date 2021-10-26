@@ -17,23 +17,23 @@ public class EnemyVision : MonoBehaviour
     [SerializeField]
     private LayerMask obstacleMask;
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
+    }
+
     private void Awake()
     {
         aiCore = transform.parent.GetComponentInChildren<AICore>();
     }
 
-
-    void Update()
+    private void Update()
     {
-        Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
-        for (int i = 0; i < targetsInViewRadius.Length; i++)
+        if (Vector3.Distance(aiCore.PlayerTransform.position, transform.position) < viewRadius)
         {
-            Transform target = targetsInViewRadius[i].transform;
-            Vector3 dirToTarget = (target.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
+            if (Mathf.Abs(Vector3.Angle(aiCore.PlayerTransform.position, transform.position)) < viewAngle)
             {
-                float dstToTarget = Vector3.Distance(transform.position, target.position);
-                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
+                if (!(aiCore.PlayerTransform.GetComponent<PlayerController>().State is SnoreState))
                 {
                     aiCore.Spotted();
                 }
