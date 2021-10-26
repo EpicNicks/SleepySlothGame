@@ -6,7 +6,7 @@ public class WinningCondition : MonoBehaviour
 {
     public GameObject winningMenuUI;
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
