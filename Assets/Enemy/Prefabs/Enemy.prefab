@@ -213,7 +213,8 @@ MonoBehaviour:
   susClip: {fileID: 0}
   enemyManager: {fileID: 0}
   animator: {fileID: 0}
-  loseMenu: {fileID: 0}
+  loseMenu: {fileID: 5573632362560834960, guid: df3d2d97b1aa747738b312217dd136f2, type: 3}
+  uiElement: {fileID: 1357974687048174987, guid: df3d2d97b1aa747738b312217dd136f2, type: 3}
 --- !u!1 &4151638596138256201
 GameObject:
   m_ObjectHideFlags: 0
