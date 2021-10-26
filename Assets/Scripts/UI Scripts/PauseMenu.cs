@@ -14,17 +14,17 @@ public class PauseMenu : MonoBehaviour
         //press Escape key or click Pause button to call PauseMenu
      if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //button.SetActive(false);
             if (GameIsPaused)
             {
                 //button.SetActive(true);
-                Cursor.visible = false;
+                //Cursor.visible = false;
                 Resume(); 
             }
             else
             {
                 Pause();
             }
+            Cursor.visible = GameIsPaused;
             
         }
     }
@@ -33,12 +33,12 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         //button.SetActive(true);
     }
     public void Pause()
     {
-        Cursor.visible = true;
+        //Cursor.visible = true;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
