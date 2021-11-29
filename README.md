@@ -1,5 +1,5 @@
 # Dummy Insomnia Description
-This was a game developed for projects of our DATT 4300 game design projects. The theme of this project was the action "snore".
+This was a game developed for project 2 of our DATT 4300 game design projects. The theme of this project was the action "snore".
 This is performed by the a sentient doll, controlled by the player, to evade enemy detection to escape a doll factory.
 
 ## Project Credits
