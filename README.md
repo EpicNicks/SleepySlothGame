@@ -5,8 +5,8 @@ This is performed by the a sentient doll, controlled by the player, to evade ene
 ## Project Credits
 <b>Lead Programmer, Core Systems Programmer</b>: Nicholas Cerisano<br>
 <b>3D Artist, Animator</b>: Eyad Tawfik<br>
-<b>Level Designer</b>: Jiahui Han<br>
-<b>UI/UX Designer, UI Programmer</b>: Xinyang Wang<br>
+<b>Level Designer</b>: Jiahui "Jason" Han<br>
+<b>UI/UX Designer, UI Programmer</b>: Xinyang "Ian" Wang<br>
 <b>2D and UI Artist, Music Composer</b>: Lukas Radlin<br>
 
 ## Links to builds
