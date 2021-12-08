@@ -9,5 +9,8 @@ This is performed by the a sentient doll, controlled by the player, to evade ene
 <b>UI/UX Designer, UI Programmer</b>: Xinyang Wang<br>
 <b>2D and UI Artist, Music Composer</b>: Lukas Radlin<br>
 
+## Links to builds
+[Final Build](https://github.com/EpicNicks/SleepySlothGame/releases/tag/build)
+
 ## Link to build on itch.io
 https://avanic-insanity.itch.io/dummy-insomnia
